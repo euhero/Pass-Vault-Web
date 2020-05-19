@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{%block head%}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
+
+{%endblock%}
+
+
+
+
+
+{%block body%}
+
+<div style="height: 50px;"></div>
+
+
+<script>
+    var clipboard = new ClipboardJS('.btn');
+
+	function makeid(length) {
+		var result           = '';
+   		var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+   		var charactersLength = characters.length;
+   		for ( var i = 0; i < length; i++ ) {
+      		result += characters.charAt(Math.floor(Math.random() * charactersLength));
+   			}
+   		return result;
+}	
+
+
+</script>
+
+
+
+<form class="form-signin" action="/" method="POST" >
+
+	<div class="input-group mb-3">
+		<input type="password" class="form-control" placeholder="Master Password" aria-label="Recipient's username" aria-describedby="basic-addon2"  name="password" id="password" value="{{password}}" required>
+		<div class="input-group-append">
+		  <button class="btn btn-outline-secondary" type="button" onclick="showorhidepass()" id='showhidebutton'><i class="fa fa-eye-slash" id="eye"></i></button>
+		</div>
+	  </div>
+	  
+
+	<div class="form-group">
+		<input type="text" name="website" id="website" class="form-control" placeholder="example.com" value="{{website}}" required>
+	</div>
+	<div class="form-group">
+		<input type="text" name="username" id="username" class="form-control" placeholder="username" value="{{username}}" required>
+	</div>
+	<div class="form-group">
+		<input type="submit" class="btn btn-primary btn-block">
+		
+	</div>
+</form>
+<br/>
+
+
+{% if displayresponse == 'POST' %}
+<button class="btn btn-lg btn-success btn-block"" data-clipboard-text="{{genpass}}" id='genpass' onclick="changebutton()">
+    Copy Generated Password
+</button>
+{%else%}
+
+<button class="btn btn-lg btn-primary btn-block"" data-clipboard-text="asa" id='genpass' onclick="changebutton()">
+    Generate Decoy Password
+</button>
+<script>document.getElementById('genpass').setAttribute("data-clipboard-text", makeid(12));</script>
+{%endif%}
+<br/>
+
+
+
+<script>
+	function sleep(ms) {
+  		return new Promise(resolve => setTimeout(resolve, ms));
+	}
+	async function changebutton(){
+		await sleep(1000);
+		document.getElementById('genpass').setAttribute("data-clipboard-text", makeid(12));
+		document.getElementById('genpass').innerHTML = 'Generate Decoy Password'
+		document.getElementById('genpass').setAttribute('class','btn btn-lg btn-primary btn-block')
+
+	}
+
+	function showorhidepass(){
+		var x = document.getElementById('password');
+		var y = document.getElementById('eye');
+		if (x.type === 'password'){
+			x.type = 'text';
+			y.setAttribute('class','fa fa-eye-slash')
+		} else {
+			
+			x.type = 'password'
+			y.setAttribute('class','fa fa-eye')
+			
+		}
+	}
+
+	
+</script>
+
+
+{%endblock%}
+
+{%block footer%}
+<span class="text-muted"><p style="font-size:10px;"><a href="https://drive.google.com/open?id=1tJD5pQdV0jCH2iD3sY84lPY-m74dfwHm" target="_blank">Get The Desktop Version</a></p></span>
+{%endblock%}
