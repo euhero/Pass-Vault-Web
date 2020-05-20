@@ -10,8 +10,6 @@ def GeneratePass(masterpassword,username,website):
 	genpassword = base64.b64encode(genpassword.encode())
 	genpassword = genpassword.decode()[:12]
 
-	print(genpassword)
-	print(type(genpassword))
 	return genpassword
 
 

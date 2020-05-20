@@ -4,9 +4,6 @@ from generatepassword import GeneratePass
 app = Flask(__name__,template_folder="templates")
 
 
-# @app.route('/')
-# def index():
-# 	return 'Welcome To My Website'
 
 @app.route('/', methods=['POST','GET'])
 def passvault():
