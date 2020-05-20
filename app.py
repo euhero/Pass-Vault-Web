@@ -11,7 +11,7 @@ def passvault():
 		password = request.form['password']
 		website = request.form['website']
 		username = request.form['username']
-		genpass = GeneratePass(password,username,website.strip('https:').strip('http:').strip('/').strip('www.'))
+		genpass = GeneratePass(password,username,website)
 		displayresponse = request.method
 
 		return render_template('passvault.html',genpass=genpass,displayresponse=displayresponse,password=password,username=username,website=website)
